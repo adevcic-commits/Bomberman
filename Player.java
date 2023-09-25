@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
  * Class that represents the player.
@@ -12,25 +13,32 @@ public class Player extends Actor
     private String downKey;
     private String rightKey;
     private String leftKey;
+    private String bombKey;
     private int stepSize;
     private int speed;
     private int counter;
+    private int bombPower;
+    private int bombCount;
      
-    public Player(String upKey, String downKey, String rightKey, String leftKey)
+    public Player(String upKey, String downKey, String rightKey, String leftKey, String bombKey)
     {
-        this(upKey, downKey, rightKey, leftKey, 3);
+        this(upKey, downKey, rightKey, leftKey, bombKey, 3, 1, 2);
     }
 
-    public Player(String upKey, String downKey, String rightKey, String leftKey, int speed)
+    public Player(String upKey, String downKey, String rightKey, String leftKey, String bombKey,
+                  int speed, int bombPower, int bombCount)
     {
         this.upKey = upKey;
         this.downKey = downKey;
         this.rightKey = rightKey;
         this.leftKey = leftKey;
         this.stepSize = stepSize;
+        this.bombKey = bombKey;
         this.stepSize = 1;
         this.speed = speed;
         this.counter = 0;
+        this.bombPower = bombPower;
+        this.bombCount = bombCount;
     }
 
     /**
@@ -45,6 +53,13 @@ public class Player extends Actor
             this.moveUsingArrows();
             this.updateImage();
             this.counter = 0;
+        }
+        
+        if (this.canPlantBomb()) {
+            Bomb bomb = new Bomb(this, this.bombPower, 90); // create an instance of the Bomb class
+            World world = this.getWorld(); // get a reference to the world
+            world.addObject(bomb, this.getX(), this.getY()); // insert the bomb into the world
+            this.bombCount = this.bombCount - 1; // lower the bomb count
         }
     }
     
@@ -70,30 +85,71 @@ public class Player extends Actor
 
     public void moveUsingArrows()
     {
+        int x = this.getX();
+        int y = this.getY();
+        
         if (Greenfoot.isKeyDown(this.leftKey)) {
             this.setRotation(180);
-            this.move(this.stepSize);
+            x = x - 1;
         }
         else {
             if (Greenfoot.isKeyDown(this.rightKey)) {
                 this.setRotation(0);
-                this.move(this.stepSize);
+                x = x + 1;
             }
             else {
                 if (Greenfoot.isKeyDown(this.upKey)) {
                     this.setRotation(270);
-                    this.move(this.stepSize);
+                    y = y - 1;
                 }
                 else {
                     if (Greenfoot.isKeyDown(this.downKey)) {
                         this.setRotation(90);
-                        this.move(this.stepSize);
+                        y = y + 1;
                     }
                 } // else “up“
             } // else “right“
         } // else “left“
+        
+        // After processing the keys the variables x and y contain coordinates of the new player location.
+        // Here we test if we can enter the cell.
+        if (this.canEnter(x, y)) {
+            // Move to the cell at coordinates x, y.
+            this.setLocation(x, y);
+        }
     }
     
+    public boolean canEnter(int x, int y) {
+        // First, we get a reference to the world and save it to a local variables
+        World world = this.getWorld();
+        // We ask the world to give us a list of walls and brick walls at given coordinates.
+        List<Wall> walls = world.getObjectsAt(x, y, Wall.class);
+        List<BrickWall> brickWalls = world.getObjectsAt(x, y, BrickWall.class);
+        // Now, we can ask the lists whether they are empty.
+        // If both of them are empty, we can enter the cell, the return value
+        // is true if and only if both lists are empty
+        return walls.isEmpty() && brickWalls.isEmpty();
+    }
+    
+    public boolean canPlantBomb()
+    {
+        if (!Greenfoot.isKeyDown(this.bombKey) || this.bombCount == 0) {
+            // if the key is not pressed or the player has no bombs the method ends right here
+            return false;
+        }
+
+        // if the key is pressed, the cell must be empty
+        int x = this.getX();
+        int y = this.getY();
+        World world = this.getWorld();
+        List<Bomb> bombs = world.getObjectsAt(x, y, Bomb.class);
+        return bombs.isEmpty();
+    }
+    
+    public void bombExploded(Bomb bomba) {
+        this.bombCount = this.bombCount + 1;
+    }
+
     public void moveAutomatically()
     {
         if (Greenfoot.isKeyDown("m")) {
