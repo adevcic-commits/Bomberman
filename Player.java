@@ -148,6 +148,19 @@ public class Player extends Actor
     public void bombExploded(Bomb bomba) {
         this.bombCount = this.bombCount + 1;
     }
+    
+    public void showDimensions()
+    {
+        // get a reference to the world
+        World world = this.getWorld();
+        // check whether the player is inside test arena
+        if (world instanceof TestArena) {
+            // safe typecast
+            TestArena arena = (TestArena)world;
+            // call the right method
+            arena.showDimensions();
+        }
+    }
 
     public void moveAutomatically()
     {
