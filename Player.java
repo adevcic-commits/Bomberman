@@ -16,7 +16,6 @@ public class Player extends Actor
     {
         if (Greenfoot.isKeyDown("m")) {
             this.move(1);
-
             // if the player is at the top edge of the world
             if (this.getY() == 0) {
                 // set the rotation downwards
@@ -42,22 +41,25 @@ public class Player extends Actor
                         if (this.getX() == 0) {
                             // set the rotation to the right
                             this.setRotation(0);
+                        }
+                        // otherwise
+                        else {
+                            // if the player is touching a brick wall, he will turn 90° right
+                            if (this.isTouching(BrickWall.class)) {
+                                this.turn(90);
+                            }
+                            // otherwise
+                            else {
+                                // if the player is touching a wall, he will turn 90° left
+                                if (this.isTouching(Wall.class)) {
+                                    this.turn(-90);
+                                }
+                            } // brick wall touch test
                         } // left edge test
                     } // bottom edge test
                 } // right edge test
             } // upper edge test
-            
-            // if the player is touching a wall, he will turn 90° counterclockwise
-            if (this.isTouching(Wall.class)) {
-                this.turn(-90);
-            }
-
-            // if the player is touching a brick wall, he will turn 90° clockwise
-            if (this.isTouching(BrickWall.class)) {
-                this.turn(90);
-            }
         }
-
     }
     
     /**
