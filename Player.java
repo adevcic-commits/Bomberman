@@ -27,7 +27,19 @@ public class Player extends Actor
             if (this.getX() == 24) {
                 // set the rotation to the left
                 this.setRotation(180);
-            }            
+            }
+            
+            // if the player is at the bottom edge of the world
+            if (this.getY() == 14) {
+                // set the rotation upwards
+                this.setRotation(270);
+            }
+
+            // if the player is at the left edge of the world
+            if (this.getX() == 0) {
+                // set the rotation to the right
+                this.setRotation(0);
+            }
         }
     }
     
