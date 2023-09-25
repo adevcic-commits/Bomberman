@@ -19,6 +19,6 @@ public class Player extends Actor
     
     public void makeLongStep()
     {
-        
+        this.move(2);
     }
 }
