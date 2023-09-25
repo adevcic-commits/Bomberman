@@ -14,7 +14,11 @@ public class Player extends Actor
      */
     public void act()
     {
-        this.walkSquare();
+        this.move(1);
+        // if the player is at the edge of the world he will turn around
+        if (this.isAtEdge()) {
+            this.turn(180);
+        }
     }
     
     /**
