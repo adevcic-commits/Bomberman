@@ -122,6 +122,21 @@ public class Player extends Actor
         return walls.isEmpty() && brickWalls.isEmpty();
     }
     
+    public boolean canPlantBomb()
+    {
+        if (!Greenfoot.isKeyDown(this.bombKey)) {
+            // if the key is not pressed the method ends right here
+            return false;
+        }
+
+        // if the key is pressed, the cell must be empty
+        int x = this.getX();
+        int y = this.getY();
+        World world = this.getWorld();
+        List<Bomb> bombs = world.getObjectsAt(x, y, Bomb.class);
+        return bombs.isEmpty();
+    }
+
     public void moveAutomatically()
     {
         if (Greenfoot.isKeyDown("m")) {
