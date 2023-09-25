@@ -16,10 +16,18 @@ public class Player extends Actor
     {
         if (Greenfoot.isKeyDown("m")) {
             this.move(1);
-            // if the player is at the edge of the world he will turn around
-            if (this.isAtEdge()) {
-                this.turn(180);
+            
+            // if the player is at the top edge of the world
+            if (this.getY() == 0) {
+                // set the rotation downwards
+                this.setRotation(90);
             }
+
+            // if the player is at the right edge of the world
+            if (this.getX() == 24) {
+                // set the rotation to the left
+                this.setRotation(180);
+            }            
         }
     }
     
