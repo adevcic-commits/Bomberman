@@ -16,6 +16,27 @@ public class Player extends Actor
     {
         this.moveAutomatically();
         this.moveUsingArrows();
+        this.updateImage();
+    }
+    
+    public void updateImage()
+    {
+        switch (this.getRotation()) {
+            case 0:
+                this.setImage("right.png");
+                break;
+            case 90:
+                this.setImage("down.png");
+                break;
+            case 180:
+                this.setImage("left.png");
+                break;
+            case 270:
+                this.setImage("up.png");
+                break;
+            default:
+                // we could change the picture to a question mark
+        }
     }
 
     public void moveUsingArrows()
