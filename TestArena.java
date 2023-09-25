@@ -17,11 +17,8 @@ public class TestArena extends Arena
     {
         super(7, 7);
         
-        // Creates three rows of walls using method from the Arena superclass.
-
-        this.createRowOfWalls(1, 1, 3, 1);
-	this.createRowOfWalls(3, 1, 3, 1);
-	this.createRowOfWalls(5, 1, 3, 1);
+        // Creates rectangle of walls using method from the Arena superclass.
+        this.createRectangleOfWalls(1, 1, 3, 3, 1, 1);
     }
     
     public void showDimensions() 
