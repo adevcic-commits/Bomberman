@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Player here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Class that represents the player.
+ *
+ * @author Peter
+ * @version 1.0
  */
 public class Player extends Actor
 {
@@ -14,6 +14,29 @@ public class Player extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        this.walkSquare();
+    }
+    
+    /**
+     * The player moves two cells in its current direction.
+     */
+    public void makeLongStep()
+    {
+        this.move(2);
+    }
+    
+    /**
+     * The player will walk 5x5 cell square.
+     */
+    public void walkSquare()
+    {
+        this.move(5);
+        this.turn(90);
+        this.move(5);
+        this.turn(90);
+        this.move(5);
+        this.turn(90);
+        this.move(5);
+        this.turn(90);
     }
 }
