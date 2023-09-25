@@ -15,5 +15,6 @@ public class TestArena extends Arena
      */
     public TestArena()
     {
+        super(7, 7);
     }
 }
