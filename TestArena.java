@@ -17,21 +17,22 @@ public class TestArena extends Arena
     {
         super(7, 7);
         
-        // Create a line of walls not using a loop
-        /*
-        this.addObject(new Wall(), 1, 3);
-        this.addObject(new Wall(), 2, 3);
-        this.addObject(new Wall(), 3, 3);
-        this.addObject(new Wall(), 4, 3);
-        this.addObject(new Wall(), 5, 3);
-        */
+        // Creates three rows of walls using for loop
+        
+        // creates walls in the second row at positions 0-4.
+	for (int i = 0; i <= 4; i++) {
+		this.addObject(new Wall(), i, 1);
+	}
 
-        // Create a line of walls not using for loop
-        
-        for (int i = 1; i <= 5; i = i + 1) {
-            this.addObject(new Wall(), i, 3);
-        }
-        
+	// creates walls in the fourth row at positions 1-5.
+	for (int i = 1; i <= 5; i++) {
+		this.addObject(new Wall(), i, 3);
+	}
+
+	// creates walls in the sixth row at positions 2-6.
+	for (int i = 2; i <= 6; i++) {
+		this.addObject(new Wall(), i, 5);
+	}	
     }
     
     public void showDimensions() 
