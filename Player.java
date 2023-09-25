@@ -15,6 +15,33 @@ public class Player extends Actor
     public void act()
     {
         this.moveAutomatically();
+        this.moveUsingArrows();
+    }
+
+    public void moveUsingArrows()
+    {
+        if (Greenfoot.isKeyDown("left")) {
+            this.setRotation(180);
+            this.move(1);
+        }
+        else {
+            if (Greenfoot.isKeyDown("right")) {
+                this.setRotation(0);
+                this.move(1);
+            }
+            else {
+                if (Greenfoot.isKeyDown("up")) {
+                    this.setRotation(270);
+                    this.move(1);
+                }
+                else {
+                    if (Greenfoot.isKeyDown("down")) {
+                        this.setRotation(90);
+                        this.move(1);
+                    }
+                } // else “up“
+            } // else “right“
+        } // else “left“
     }
     
     public void moveAutomatically()
