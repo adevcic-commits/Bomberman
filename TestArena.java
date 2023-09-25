@@ -17,4 +17,9 @@ public class TestArena extends Arena
     {
         super(7, 7);
     }
+    
+    public void showDimensions() 
+    {
+        this.showText("Width: " + this.getWidth() + " Height: " + this.getHeight(), this.getWidth() / 2, this.getHeight() / 2);
+    }
 }
