@@ -13,19 +13,24 @@ public class Player extends Actor
     private String rightKey;
     private String leftKey;
     private int stepSize;
+    private int speed;
+    private int counter;
      
     public Player(String upKey, String downKey, String rightKey, String leftKey)
     {
-        this(upKey, downKey, rightKey, leftKey, 1);
+        this(upKey, downKey, rightKey, leftKey, 3);
     }
 
-    public Player(String upKey, String downKey, String rightKey, String leftKey, int stepSize)
+    public Player(String upKey, String downKey, String rightKey, String leftKey, int speed)
     {
         this.upKey = upKey;
         this.downKey = downKey;
         this.rightKey = rightKey;
         this.leftKey = leftKey;
         this.stepSize = stepSize;
+        this.stepSize = 1;
+        this.speed = speed;
+        this.counter = 0;
     }
 
     /**
@@ -34,9 +39,13 @@ public class Player extends Actor
      */
     public void act()
     {
-        this.moveAutomatically();
-        this.moveUsingArrows();
-        this.updateImage();
+        this.counter = counter + 1;
+        if (this.counter == this.speed) {
+            this.moveAutomatically();
+            this.moveUsingArrows();
+            this.updateImage();
+            this.counter = 0;
+        }
     }
     
     public void updateImage()
