@@ -12,15 +12,22 @@ public class Player extends Actor
     private String downKey;
     private String rightKey;
     private String leftKey;
+    private int stepSize;
      
     public Player(String upKey, String downKey, String rightKey, String leftKey)
+    {
+        this(upKey, downKey, rightKey, leftKey, 1);
+    }
+
+    public Player(String upKey, String downKey, String rightKey, String leftKey, int stepSize)
     {
         this.upKey = upKey;
         this.downKey = downKey;
         this.rightKey = rightKey;
         this.leftKey = leftKey;
+        this.stepSize = stepSize;
     }
-    
+
     /**
      * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
