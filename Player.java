@@ -8,15 +8,44 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Player extends Actor
 {
+    private String upKey;
+    private String downKey;
+    private String rightKey;
+    private String leftKey;
+    private int stepSize;
+    private int speed;
+    private int counter;
+     
+    public Player(String upKey, String downKey, String rightKey, String leftKey)
+    {
+        this(upKey, downKey, rightKey, leftKey, 3);
+    }
+
+    public Player(String upKey, String downKey, String rightKey, String leftKey, int speed)
+    {
+        this.upKey = upKey;
+        this.downKey = downKey;
+        this.rightKey = rightKey;
+        this.leftKey = leftKey;
+        this.stepSize = stepSize;
+        this.stepSize = 1;
+        this.speed = speed;
+        this.counter = 0;
+    }
+
     /**
      * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
-        this.moveAutomatically();
-        this.moveUsingArrows();
-        this.updateImage();
+        this.counter = counter + 1;
+        if (this.counter == this.speed) {
+            this.moveAutomatically();
+            this.moveUsingArrows();
+            this.updateImage();
+            this.counter = 0;
+        }
     }
     
     public void updateImage()
@@ -41,24 +70,24 @@ public class Player extends Actor
 
     public void moveUsingArrows()
     {
-        if (Greenfoot.isKeyDown("left")) {
+        if (Greenfoot.isKeyDown(this.leftKey)) {
             this.setRotation(180);
-            this.move(1);
+            this.move(this.stepSize);
         }
         else {
-            if (Greenfoot.isKeyDown("right")) {
+            if (Greenfoot.isKeyDown(this.rightKey)) {
                 this.setRotation(0);
-                this.move(1);
+                this.move(this.stepSize);
             }
             else {
-                if (Greenfoot.isKeyDown("up")) {
+                if (Greenfoot.isKeyDown(this.upKey)) {
                     this.setRotation(270);
-                    this.move(1);
+                    this.move(this.stepSize);
                 }
                 else {
-                    if (Greenfoot.isKeyDown("down")) {
+                    if (Greenfoot.isKeyDown(this.downKey)) {
                         this.setRotation(90);
-                        this.move(1);
+                        this.move(this.stepSize);
                     }
                 } // else “up“
             } // else “right“
