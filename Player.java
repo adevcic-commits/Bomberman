@@ -101,6 +101,10 @@ public class Player extends Actor
         } // else “left“
     }
     
+    public boolean canEnter(int x, int y) {
+        return true;
+    }
+    
     public void moveAutomatically()
     {
         if (Greenfoot.isKeyDown("m")) {
