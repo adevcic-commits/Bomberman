@@ -17,6 +17,9 @@ public class Player extends Actor
         // Add your action code here.
     }
     
+    /**
+     * The player moves two cells in its current direction.
+     */
     public void makeLongStep()
     {
         this.move(2);
