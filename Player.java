@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
  * Class that represents the player.
@@ -105,7 +106,14 @@ public class Player extends Actor
     }
     
     public boolean canEnter(int x, int y) {
-        return true;
+        // First, we get a reference to the world and save it to a local variables
+        World world = this.getWorld();
+        // We ask the world to give us a list of walls at given coordinates.
+        List<Wall> walls = world.getObjectsAt(x, y, Wall.class);
+        // Now, we can ask the list whether it is empty.
+        // If it is empty, we can enter the cell, the return values
+        // is therefore equal to the result of walls.isEmpty()
+        return walls.isEmpty();
     }
     
     public void moveAutomatically()
