@@ -70,14 +70,19 @@ public class Player extends Actor
 
     public void moveUsingArrows()
     {
+        int x = this.getX();
+        int y = this.getY();
+        
         if (Greenfoot.isKeyDown(this.leftKey)) {
             this.setRotation(180);
             this.move(this.stepSize);
+            x = x - 1;
         }
         else {
             if (Greenfoot.isKeyDown(this.rightKey)) {
                 this.setRotation(0);
                 this.move(this.stepSize);
+                x = x + 1;
             }
             else {
                 if (Greenfoot.isKeyDown(this.upKey)) {
