@@ -88,11 +88,13 @@ public class Player extends Actor
                 if (Greenfoot.isKeyDown(this.upKey)) {
                     this.setRotation(270);
                     this.move(this.stepSize);
+                    y = y - 1;
                 }
                 else {
                     if (Greenfoot.isKeyDown(this.downKey)) {
                         this.setRotation(90);
                         this.move(this.stepSize);
+                        y = y + 1;
                     }
                 } // else “up“
             } // else “right“
