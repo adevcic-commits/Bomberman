@@ -31,4 +31,21 @@ public class Arena extends World
             this.addObject(new Wall(), startColumnNumber + (i - 1) *  (spaces + 1), rowNumber);
         }
     }
+    
+    /**
+     * Creates rectangle of walls as described by the parameters.
+     * @param rowNumber specifies row of the top left corner. The top row is 0.
+     * @param columnNumber specifies column of the top left corner. The leftmost column is 0.
+     * @param rowCount specifies the number of rows.
+     * @param inRowCount specifies the number of walls in a row.
+     * @param rowSpace specifies the number of empty rows in between rows occupied by walls.
+     * @param columnSpace specifies the number of empty cells in between walls in a single column.
+     */
+    public void createRectangleOfWalls(int rowNumber, int columnNumber, int rowCount,
+                                       int inRowCount, int rowSpace, int columnSpace)
+    {
+        for (int i = 1; i <= rowCount; i = i + 1) {
+            this.createRowOfWalls(rowNumber + (i - 1) * (rowSpace + 1), columnNumber, inRowCount, columnSpace);
+        }
+    }
 }
