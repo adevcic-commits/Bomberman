@@ -75,30 +75,33 @@ public class Player extends Actor
         
         if (Greenfoot.isKeyDown(this.leftKey)) {
             this.setRotation(180);
-            this.move(this.stepSize);
             x = x - 1;
         }
         else {
             if (Greenfoot.isKeyDown(this.rightKey)) {
                 this.setRotation(0);
-                this.move(this.stepSize);
                 x = x + 1;
             }
             else {
                 if (Greenfoot.isKeyDown(this.upKey)) {
                     this.setRotation(270);
-                    this.move(this.stepSize);
                     y = y - 1;
                 }
                 else {
                     if (Greenfoot.isKeyDown(this.downKey)) {
                         this.setRotation(90);
-                        this.move(this.stepSize);
                         y = y + 1;
                     }
                 } // else “up“
             } // else “right“
         } // else “left“
+        
+        // After processing the keys the variables x and y contain coordinates of the new player location.
+        // Here we test if we can enter the cell.
+        if (this.canEnter(x, y)) {
+            // Move to the cell at coordinates x, y.
+            this.setLocation(x, y);
+        }
     }
     
     public boolean canEnter(int x, int y) {
