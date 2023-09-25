@@ -30,6 +30,8 @@ public class Bomb extends Actor
             // bomb exploded, remove it from the world
             World world = this.getWorld();
             world.removeObject(this);
+            // play the explosion sound
+            Greenfoot.playSound("explosion.wav");         
         }
     }
 }
