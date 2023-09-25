@@ -14,7 +14,7 @@ public class Player extends Actor
      */
     public void act()
     {
-        this.makeLongStep();
+        this.walkSquare();
     }
     
     /**
@@ -23,5 +23,20 @@ public class Player extends Actor
     public void makeLongStep()
     {
         this.move(2);
+    }
+    
+    /**
+     * The player will walk 5x5 cell square.
+     */
+    public void walkSquare()
+    {
+        this.move(5);
+        this.turn(90);
+        this.move(5);
+        this.turn(90);
+        this.move(5);
+        this.turn(90);
+        this.move(5);
+        this.turn(90);
     }
 }
