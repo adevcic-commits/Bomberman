@@ -13,25 +13,30 @@ public class Player extends Actor
     private String downKey;
     private String rightKey;
     private String leftKey;
+    private String bombKey;
     private int stepSize;
     private int speed;
     private int counter;
+    private int bombPower;
      
-    public Player(String upKey, String downKey, String rightKey, String leftKey)
+    public Player(String upKey, String downKey, String rightKey, String leftKey, String bombKey)
     {
-        this(upKey, downKey, rightKey, leftKey, 3);
+        this(upKey, downKey, rightKey, leftKey, bombKey, 3, 1);
     }
 
-    public Player(String upKey, String downKey, String rightKey, String leftKey, int speed)
+    public Player(String upKey, String downKey, String rightKey, String leftKey, String bombKey,
+                  int speed, int bombPower)
     {
         this.upKey = upKey;
         this.downKey = downKey;
         this.rightKey = rightKey;
         this.leftKey = leftKey;
         this.stepSize = stepSize;
+        this.bombKey = bombKey;
         this.stepSize = 1;
         this.speed = speed;
         this.counter = 0;
+        this.bombPower = bombPower;
     }
 
     /**
