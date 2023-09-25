@@ -8,6 +8,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Player extends Actor
 {
+    private String upKey;
+    private String downKey;
+    private String rightKey;
+    private String leftKey;
+     
+    public Player(String upKey, String downKey, String rightKey, String leftKey)
+    {
+        this.upKey = upKey;
+        this.downKey = downKey;
+        this.rightKey = rightKey;
+        this.leftKey = leftKey;
+    }
+    
     /**
      * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -41,22 +54,22 @@ public class Player extends Actor
 
     public void moveUsingArrows()
     {
-        if (Greenfoot.isKeyDown("left")) {
+        if (Greenfoot.isKeyDown(this.leftKey)) {
             this.setRotation(180);
             this.move(1);
         }
         else {
-            if (Greenfoot.isKeyDown("right")) {
+            if (Greenfoot.isKeyDown(this.rightKey)) {
                 this.setRotation(0);
                 this.move(1);
             }
             else {
-                if (Greenfoot.isKeyDown("up")) {
+                if (Greenfoot.isKeyDown(this.upKey)) {
                     this.setRotation(270);
                     this.move(1);
                 }
                 else {
-                    if (Greenfoot.isKeyDown("down")) {
+                    if (Greenfoot.isKeyDown(this.downKey)) {
                         this.setRotation(90);
                         this.move(1);
                     }
