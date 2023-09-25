@@ -18,14 +18,15 @@ public class Player extends Actor
     private int speed;
     private int counter;
     private int bombPower;
+    private int bombCount;
      
     public Player(String upKey, String downKey, String rightKey, String leftKey, String bombKey)
     {
-        this(upKey, downKey, rightKey, leftKey, bombKey, 3, 1);
+        this(upKey, downKey, rightKey, leftKey, bombKey, 3, 1, 2);
     }
 
     public Player(String upKey, String downKey, String rightKey, String leftKey, String bombKey,
-                  int speed, int bombPower)
+                  int speed, int bombPower, int bombCount)
     {
         this.upKey = upKey;
         this.downKey = downKey;
@@ -37,6 +38,7 @@ public class Player extends Actor
         this.speed = speed;
         this.counter = 0;
         this.bombPower = bombPower;
+        this.bombCount = bombCount;
     }
 
     /**
@@ -51,6 +53,13 @@ public class Player extends Actor
             this.moveUsingArrows();
             this.updateImage();
             this.counter = 0;
+        }
+        
+        if (this.canPlantBomb()) {
+            Bomb bomb = new Bomb(this, this.bombPower, 90); // create an instance of the Bomb class
+            World world = this.getWorld(); // get a reference to the world
+            world.addObject(bomb, this.getX(), this.getY()); // insert the bomb into the world
+            this.bombCount = this.bombCount - 1; // lower the bomb count
         }
     }
     
@@ -124,8 +133,8 @@ public class Player extends Actor
     
     public boolean canPlantBomb()
     {
-        if (!Greenfoot.isKeyDown(this.bombKey)) {
-            // if the key is not pressed the method ends right here
+        if (!Greenfoot.isKeyDown(this.bombKey) || this.bombCount == 0) {
+            // if the key is not pressed or the player has no bombs the method ends right here
             return false;
         }
 
@@ -135,6 +144,10 @@ public class Player extends Actor
         World world = this.getWorld();
         List<Bomb> bombs = world.getObjectsAt(x, y, Bomb.class);
         return bombs.isEmpty();
+    }
+    
+    public void bombExploded(Bomb bomba) {
+        this.bombCount = this.bombCount + 1;
     }
 
     public void moveAutomatically()

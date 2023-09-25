@@ -8,10 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Bomb extends Actor
 {
+    private Player owner;
     private int power;
+    private int timer;
     
-    public Bomb(int power) {
+    public Bomb(Player owner, int power, int timer) {
+        this.owner = owner;
         this.power = power;
+        this.timer = timer;
     }
     
     /**
@@ -20,6 +24,12 @@ public class Bomb extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        this.timer = this.timer - 1;
+        if (this.timer == 0) {
+            this.owner.bombExploded(this);
+            // bomb exploded, remove it from the world
+            World world = this.getWorld();
+            world.removeObject(this);
+        }
     }
 }
