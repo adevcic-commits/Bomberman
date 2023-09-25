@@ -14,6 +14,11 @@ public class Player extends Actor
      */
     public void act()
     {
+        this.moveAutomatically();
+    }
+    
+    public void moveAutomatically()
+    {
         if (Greenfoot.isKeyDown("m")) {
             this.move(1);
             // if the player is at the top edge of the world
