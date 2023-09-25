@@ -120,15 +120,14 @@ public class Player extends Actor
     }
     
     public boolean canEnter(int x, int y) {
-        // First, we get a reference to the world and save it to a local variables
+        // First, we get a reference to the world and save it to a local variable.
         World world = this.getWorld();
-        // We ask the world to give us a list of walls and brick walls at given coordinates.
-        List<Wall> walls = world.getObjectsAt(x, y, Wall.class);
-        List<BrickWall> brickWalls = world.getObjectsAt(x, y, BrickWall.class);
-        // Now, we can ask the lists whether they are empty.
-        // If both of them are empty, we can enter the cell, the return value
-        // is true if and only if both lists are empty
-        return walls.isEmpty() && brickWalls.isEmpty();
+        // We ask the world to give us a list of obstacles at given coordinates.
+        List<Obstacle> obstacles = world.getObjectsAt(x, y, Obstacle.class);
+        // Now, we can ask the list whether it is empty.
+        // If it is empty, we can enter the cell, the return value
+        // is the same as the value of obstacles.isEmpty().
+        return obstacles.isEmpty();
     }
     
     public boolean canPlantBomb()
