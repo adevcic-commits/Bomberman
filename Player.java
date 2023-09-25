@@ -40,6 +40,11 @@ public class Player extends Actor
                 // set the rotation to the right
                 this.setRotation(0);
             }
+            
+            // if the player is touching a wall, he will turn 90° counterclockwise
+            if (this.isTouching(Wall.class)) {
+                this.turn(-90);
+            }
         }
     }
     
