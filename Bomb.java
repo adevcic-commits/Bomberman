@@ -46,7 +46,11 @@ public class Bomb extends Actor
             World world = this.getWorld();
 
             // create fire in the location of the bomb before we remove it from the world
-            world.addObject(new Fire(5), this.getX(), this.getY());            
+            world.addObject(new Fire(5), this.getX(), this.getY());
+            for (int i = 1; i <= this.power; i = i + 1) {
+                world.addObject(new Fire(5), this.getX() + i, this.getY());
+            }
+
             world.removeObject(this);
             // play the explosion sound
             Greenfoot.playSound("explosion.wav");         
