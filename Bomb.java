@@ -26,7 +26,7 @@ public class Bomb extends Actor
     public void act()
     {
         this.timer = this.timer - 1;
-        if (this.timer == 0) {
+        if (this.timer == 0 || this.isTouching(Fire.class)) {
             if (this.owner != null) {
                 this.owner.bombExploded(this);
             }
