@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
+import java.util.LinkedList;
 
 /**
  * Class that represents the player.
@@ -19,6 +20,7 @@ public class Player extends Actor
     private int counter;
     private int bombPower;
     private int bombCount;
+    private LinkedList<Bomb> listOfActiveBombs;
      
     public Player(String upKey, String downKey, String rightKey, String leftKey, String bombKey)
     {
@@ -39,6 +41,7 @@ public class Player extends Actor
         this.counter = 0;
         this.bombPower = bombPower;
         this.bombCount = bombCount;
+        this.listOfActiveBombs = new LinkedList<Bomb>();
     }
 
     /**
@@ -60,12 +63,16 @@ public class Player extends Actor
             World world = this.getWorld(); // get a reference to the world
             world.addObject(bomb, this.getX(), this.getY()); // insert the bomb into the world
             this.bombCount = this.bombCount - 1; // lower the bomb count
+            this.listOfActiveBombs.add(bomb); // register the bomb
         }
     }
     
     public void hit() {
         Arena arena = (Arena)this.getWorld();
         arena.unregisterAndRemovePlayer(this);
+        for (Bomb bomb : this.listOfActiveBombs) {
+            bomb.removeOwner();
+        }
     }
 
     public void updateImage()
@@ -152,6 +159,7 @@ public class Player extends Actor
     
     public void bombExploded(Bomb bomba) {
         this.bombCount = this.bombCount + 1;
+        this.listOfActiveBombs.remove(bomba);
     }
     
     public void showDimensions()
