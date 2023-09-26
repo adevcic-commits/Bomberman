@@ -63,6 +63,11 @@ public class Player extends Actor
         }
     }
     
+    public void hit() {
+        Arena arena = (Arena)this.getWorld();
+        arena.unregisterAndRemovePlayer(this);
+    }
+
     public void updateImage()
     {
         switch (this.getRotation()) {

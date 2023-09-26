@@ -37,7 +37,7 @@ public class Bomb extends Actor
             
             // we need to iterate over all players efficiently
             for (Player player : hitPlayers) {
-                arena.unregisterAndRemovePlayer(player);
+                player.hit(); // player was hit by the bomb
             }
 
             // bomb exploded, remove it from the world
