@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
  * Write a description of class Bomb here.
@@ -27,6 +28,10 @@ public class Bomb extends Actor
         this.timer = this.timer - 1;
         if (this.timer == 0) {
             this.owner.bombExploded(this);
+
+            // get a list of players that are in the range of the explosion
+            List<Player> hitPlayers = this.getObjectsInRange(this.power, Player.class);
+
             // bomb exploded, remove it from the world
             World world = this.getWorld();
             world.removeObject(this);
