@@ -37,6 +37,12 @@ public class Arena extends World
         }
     }
     
+    public void unregisterAndRemovePlayer(Player player)
+    {
+        this.listOfPlayers.remove(player);
+        this.removeObject(player);
+    }
+
     /**
      * Creates row of walls as described by the parameters.
      * @param rowNumber specifies row in which the wall should be created. The top row is 0.
