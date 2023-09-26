@@ -35,9 +35,8 @@ public class Bomb extends Actor
             // get a reference to the arena since it can unregister the player
             Arena arena = (Arena)this.getWorld();
             
-            // we need to iterate over all players, that is from 0 to size
-            for (int i = 0; i < hitPlayers.size(); i = i + 1) {
-                Player player = hitPlayers.get(i);
+            // we need to iterate over all players efficiently
+            for (Player player : hitPlayers) {
                 arena.unregisterAndRemovePlayer(player);
             }
 
