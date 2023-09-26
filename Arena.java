@@ -17,6 +17,13 @@ public class Arena extends World
         super(width, height, 60);
     }
 
+    public void act()
+    {
+        if (this.isGameEnded()) {
+            Greenfoot.stop();
+        }
+    }
+    
     /**
      * Creates row of walls as described by the parameters.
      * @param rowNumber specifies row in which the wall should be created. The top row is 0.
