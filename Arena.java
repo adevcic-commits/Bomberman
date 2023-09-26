@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.LinkedList;
 
 /**
  * Write a description of class Arena here.
@@ -8,6 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Arena extends World
 {
+    private LinkedList<Player> listOfPlayers;
+
     /**
      * Constructor for objects of class Arena. 
      */
@@ -15,6 +18,8 @@ public class Arena extends World
     {    
         // Create a new world with width x height cells with a cell size of 60x60 pixels.
         super(width, height, 60);
+
+        this.listOfPlayers = new LinkedList<Player>();
     }
 
     public void act()
