@@ -14,6 +14,9 @@ public class BrickWall extends Obstacle
      */
     public void act()
     {
-        // Add your action code here.
+        if (this.isTouching(Fire.class)) {
+            World world = this.getWorld();
+            world.removeObject(this);
+        }
     }
 }
