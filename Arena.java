@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.LinkedList;
 
 /**
  * Write a description of class Arena here.
@@ -8,6 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Arena extends World
 {
+    private LinkedList<Player> listOfPlayers;
+
     /**
      * Constructor for objects of class Arena. 
      */
@@ -15,6 +18,29 @@ public class Arena extends World
     {    
         // Create a new world with width x height cells with a cell size of 60x60 pixels.
         super(width, height, 60);
+
+        this.listOfPlayers = new LinkedList<Player>();
+    }
+
+    public void act()
+    {
+        if (this.isGameEnded()) {
+            Greenfoot.stop();
+        }
+    }
+    
+    public void registerPlayer(Player player) 
+    {
+        // we should not register already registered player
+        if (!this.listOfPlayers.contains(player)) {
+            this.listOfPlayers.add(player);
+        }
+    }
+    
+    public void unregisterAndRemovePlayer(Player player)
+    {
+        this.listOfPlayers.remove(player);
+        this.removeObject(player);
     }
 
     /**
@@ -47,5 +73,11 @@ public class Arena extends World
         for (int i = 1; i <= rowCount; i = i + 1) {
             this.createRowOfWalls(rowNumber + (i - 1) * (rowSpace + 1), columnNumber, inRowCount, columnSpace);
         }
+    }
+    
+    public boolean isGameEnded() 
+    {
+        // game ends when there is at most one player left
+        return this.listOfPlayers.size() <= 1;
     }
 }
