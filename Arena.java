@@ -48,4 +48,10 @@ public class Arena extends World
             this.createRowOfWalls(rowNumber + (i - 1) * (rowSpace + 1), columnNumber, inRowCount, columnSpace);
         }
     }
+    
+    public boolean isGameEnded() 
+    {
+        // for now, assume that the game never ends
+        return false;
+    }
 }
