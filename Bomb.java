@@ -27,7 +27,9 @@ public class Bomb extends Actor
     {
         this.timer = this.timer - 1;
         if (this.timer == 0) {
-            this.owner.bombExploded(this);
+            if (this.owner != null) {
+                this.owner.bombExploded(this);
+            }
 
             // get a list of players that are in the range of the explosion
             List<Player> hitPlayers = this.getObjectsInRange(this.power, Player.class);
