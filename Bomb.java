@@ -71,7 +71,7 @@ public class Bomb extends Actor
         int coordRow = this.getY() + deltaY;
         
         World world = this.getWorld();
-        while (i <= this.power) {
+        while (i <= this.power && this.canCellExplode(coordColumn, coordRow)) {
             world.addObject(new Fire(5), coordColumn, coordRow);
             // update the counter
             i = i + 1;
