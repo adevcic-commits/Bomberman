@@ -47,4 +47,9 @@ public class Bomb extends Actor
             Greenfoot.playSound("explosion.wav");         
         }
     }
+
+    public void removeOwner()
+    {
+        this.owner = null;
+    }
 }
