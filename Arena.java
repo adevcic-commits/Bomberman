@@ -29,6 +29,14 @@ public class Arena extends World
         }
     }
     
+    public void registerPlayer(Player player) 
+    {
+        // we should not register already registered player
+        if (!this.listOfPlayers.contains(player)) {
+            this.listOfPlayers.add(player);
+        }
+    }
+    
     /**
      * Creates row of walls as described by the parameters.
      * @param rowNumber specifies row in which the wall should be created. The top row is 0.
