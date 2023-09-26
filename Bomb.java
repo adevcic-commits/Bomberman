@@ -80,4 +80,17 @@ public class Bomb extends Actor
             coordRow = coordRow + deltaY;
         }
     }
+
+    private boolean canCellExplode(int x, int y) {
+        World world = this.getWorld();
+        if (x >= 0 && x < world.getWidth() &&
+            y >= 0 && y < world.getHeight()) {
+            List<Wall> walls = world.getObjectsAt(x, y, Wall.class);
+            return walls.isEmpty();
+        }
+        else {
+            // coordinates do not belong to the world
+            return false;
+        }
+    }
 }
