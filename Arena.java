@@ -77,7 +77,7 @@ public class Arena extends World
     
     public boolean isGameEnded() 
     {
-        // for now, assume that the game never ends
-        return false;
+        // game ends when there is at most one player left
+        return this.listOfPlayers.size() <= 1;
     }
 }
