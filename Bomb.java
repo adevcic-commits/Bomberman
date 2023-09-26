@@ -31,17 +31,6 @@ public class Bomb extends Actor
                 this.owner.bombExploded(this);
             }
 
-            // get a list of players that are in the range of the explosion
-            List<Player> hitPlayers = this.getObjectsInRange(this.power, Player.class);
-
-            // get a reference to the arena since it can unregister the player
-            Arena arena = (Arena)this.getWorld();
-
-            // we need to iterate over all players efficiently
-            for (Player player : hitPlayers) {
-                player.hit(); // player was hit by the bomb
-            }
-
             // bomb exploded, remove it from the world
             World world = this.getWorld();
 

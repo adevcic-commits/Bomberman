@@ -50,20 +50,26 @@ public class Player extends Actor
      */
     public void act()
     {
-        this.counter = counter + 1;
-        if (this.counter == this.speed) {
-            this.moveAutomatically();
-            this.moveUsingArrows();
-            this.updateImage();
-            this.counter = 0;
+        // if the player is touching a fire, the he is hit and wont respond to any controls
+        if (this.isTouching(Fire.class)) {
+            this.hit();
         }
-        
-        if (this.canPlantBomb()) {
-            Bomb bomb = new Bomb(this, this.bombPower, 90); // create an instance of the Bomb class
-            World world = this.getWorld(); // get a reference to the world
-            world.addObject(bomb, this.getX(), this.getY()); // insert the bomb into the world
-            this.bombCount = this.bombCount - 1; // lower the bomb count
-            this.listOfActiveBombs.add(bomb); // register the bomb
+        else {
+            this.counter = counter + 1;
+            if (this.counter == this.speed) {
+                this.moveAutomatically();
+                this.moveUsingArrows();
+                this.updateImage();
+                this.counter = 0;
+            }
+
+            if (this.canPlantBomb()) {
+                Bomb bomb = new Bomb(this, this.bombPower, 90); // create an instance of the Bomb class
+                World world = this.getWorld(); // get a reference to the world
+                world.addObject(bomb, this.getX(), this.getY()); // insert the bomb into the world
+                this.bombCount = this.bombCount - 1; // lower the bomb count
+                this.listOfActiveBombs.add(bomb); // register the bomb
+            }
         }
     }
     
