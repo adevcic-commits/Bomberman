@@ -82,4 +82,22 @@ public class Bomb extends Actor
     {
         this.owner = null;
     }
+    
+    private void spreadFire(int deltaX, int deltaY) {
+        // initialize fire counter
+        int i = 1;
+        // calculate the coordinates at which the fire will be placed
+        int coordColumn = this.getX() + deltaX;
+        int coordRow = this.getY() + deltaY;
+        
+        World world = this.getWorld();
+        while (i <= this.power) {
+            world.addObject(new Fire(5), coordColumn, coordRow);
+            // update the counter
+            i = i + 1;
+            // update the coordinates
+            coordColumn = coordColumn + deltaX;
+            coordRow = coordRow + deltaY;
+        }
+    }
 }
