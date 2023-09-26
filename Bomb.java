@@ -93,4 +93,17 @@ public class Bomb extends Actor
             return false;
         }
     }
+
+    private boolean canExplosionContinue(int x, int y) {
+        World world = this.getWorld();
+        if (x >= 0 && x < world.getWidth() &&
+            y >= 0 && y < world.getHeight()) {
+            List<BrickWall> brickWalls = world.getObjectsAt(x, y, BrickWall.class);
+            return brickWalls.isEmpty();
+        }
+        else {
+            // coordinates do not belong to the world
+            return false;
+        }
+    }
 }
