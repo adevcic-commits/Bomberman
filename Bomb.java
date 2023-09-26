@@ -73,11 +73,20 @@ public class Bomb extends Actor
         World world = this.getWorld();
         while (i <= this.power && this.canCellExplode(coordColumn, coordRow)) {
             world.addObject(new Fire(5), coordColumn, coordRow);
-            // update the counter
-            i = i + 1;
-            // update the coordinates
-            coordColumn = coordColumn + deltaX;
-            coordRow = coordRow + deltaY;
+            
+            // test whether the explosion can continue
+            if (this.canExplosionContinue(coordColumn, coordRow)) {
+                // update the counter
+                i = i + 1;
+                // update the coordinates
+                coordColumn = coordColumn + deltaX;
+                coordRow = coordRow + deltaY;
+            }
+            else {
+                // if the explosion cannot continue we increase the value of the variable i
+                // this will make the condition of the while loop evaluate to false
+                i = this.power + 1;
+            }
         }
     }
 
