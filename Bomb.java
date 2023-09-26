@@ -47,8 +47,21 @@ public class Bomb extends Actor
 
             // create fire in the location of the bomb before we remove it from the world
             world.addObject(new Fire(5), this.getX(), this.getY());
+            // spread fire to the right
             for (int i = 1; i <= this.power; i = i + 1) {
                 world.addObject(new Fire(5), this.getX() + i, this.getY());
+            }            
+            // spread fire to the left
+            for (int i = 1; i <= this.power; i = i + 1) {
+                world.addObject(new Fire(5), this.getX() - i, this.getY());
+            }
+            // spread fire upwards
+            for (int i = 1; i <= this.power; i = i + 1) {
+                world.addObject(new Fire(5), this.getX(), this.getY() - i);
+            }
+            // spread fire downwards
+            for (int i = 1; i <= this.power; i = i + 1) {
+                world.addObject(new Fire(5), this.getX(), this.getY() + i);
             }
 
             world.removeObject(this);
