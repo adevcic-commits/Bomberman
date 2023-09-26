@@ -33,10 +33,10 @@ public class Bomb extends Actor
 
             // get a list of players that are in the range of the explosion
             List<Player> hitPlayers = this.getObjectsInRange(this.power, Player.class);
-            
+
             // get a reference to the arena since it can unregister the player
             Arena arena = (Arena)this.getWorld();
-            
+
             // we need to iterate over all players efficiently
             for (Player player : hitPlayers) {
                 player.hit(); // player was hit by the bomb
@@ -44,6 +44,9 @@ public class Bomb extends Actor
 
             // bomb exploded, remove it from the world
             World world = this.getWorld();
+
+            // create fire in the location of the bomb before we remove it from the world
+            world.addObject(new Fire(5), this.getX(), this.getY());            
             world.removeObject(this);
             // play the explosion sound
             Greenfoot.playSound("explosion.wav");         
