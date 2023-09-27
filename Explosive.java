@@ -20,7 +20,19 @@ public class Explosive extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        // check whether explosive should explode (subclass will provide an answer)
+        if (this.shouldExplode()) {
+            // the explosive should explode so
+            // we notify the owner that one of his explosives exploded
+            if (this.owner != null) {
+                this.owner.explosiveExploded(this);
+            }
+            // we let subclasses to respond (create fires)
+            this.explosion();
+            // finally we remove the explosive from the world
+            World world = this.getWorld();
+            world.removeObject(this);
+        }
     }
     
     public void removeOwner()
