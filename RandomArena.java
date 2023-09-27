@@ -24,6 +24,7 @@ public class RandomArena extends Arena
     
     public void createRandomWall()
     {
-        
+        int randomColumn = this.dice.nextInt(this.getWidth());
+        int randomRow = this.dice.nextInt(this.getHeight());   
     }
 }
