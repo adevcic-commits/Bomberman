@@ -22,8 +22,7 @@ public class Player extends Actor
     private int bombPower;
     private int bombCount;
     private int mineCount;
-    private LinkedList<Bomb> listOfActiveBombs;
-    private LinkedList<Mine> listOfActiveMines;
+    private LinkedList<Explosive> listOfActiveExplosives;
      
     public Player(String upKey, String downKey, String rightKey, String leftKey, String bombKey, String mineKey)
     {
@@ -46,8 +45,7 @@ public class Player extends Actor
         this.bombPower = bombPower;
         this.bombCount = bombCount;
         this.mineCount = mineCount;
-        this.listOfActiveBombs = new LinkedList<Bomb>();
-        this.listOfActiveMines = new LinkedList<Mine>();
+        this.listOfActiveExplosives = new LinkedList<Explosive>();
     }
 
     /**
