@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Explosive extends Actor
 {
-    private Player owner;
+    protected Player owner;
     
     public Explosive(Player owner) {
         this.owner = owner;
