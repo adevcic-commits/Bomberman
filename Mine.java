@@ -6,13 +6,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Mine extends Actor
+public class Mine extends Explosive
 {
-    private Player owner;
     private int timer;
     
     public Mine(Player owner) {
-        this.owner = owner;
+        super(owner);
         this.timer = 5;
     }
     
@@ -46,8 +45,8 @@ public class Mine extends Actor
 
         if (shouldExplode) {
             // we let the player know that the mine exploded
-            if (this.owner != null) {
-                this.owner.mineExploded(this);
+            if (super.owner != null) {
+                super.owner.mineExploded(this);
             }
             // create a fire in place of the mine
             // before we remove it from the world
@@ -57,10 +56,5 @@ public class Mine extends Actor
             // remove the mine from the world
             world.removeObject(this);
         }
-    }
-    
-    public void removeOwner()
-    {
-        this.owner = null;
     }
 }

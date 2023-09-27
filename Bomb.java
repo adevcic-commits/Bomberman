@@ -7,14 +7,13 @@ import java.util.List;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Bomb extends Actor
+public class Bomb extends Explosive
 {
-    private Player owner;
     private int power;
     private int timer;
     
     public Bomb(Player owner, int power, int timer) {
-        this.owner = owner;
+        super(owner);
         this.power = power;
         this.timer = timer;
     }
@@ -27,8 +26,8 @@ public class Bomb extends Actor
     {
         this.timer = this.timer - 1;
         if (this.timer == 0 || this.isTouching(Fire.class)) {
-            if (this.owner != null) {
-                this.owner.bombExploded(this);
+            if (super.owner != null) {
+                super.owner.bombExploded(this);
             }
 
             // bomb exploded, remove it from the world
@@ -45,11 +44,6 @@ public class Bomb extends Actor
             // play the explosion sound
             Greenfoot.playSound("explosion.wav");         
         }
-    }
-
-    public void removeOwner()
-    {
-        this.owner = null;
     }
     
     private void spreadFire(int deltaX, int deltaY) {
