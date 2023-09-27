@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.Random;
+import java.util.List;
 
 /**
  * Write a description of class RandomArena here.
@@ -26,5 +27,10 @@ public class RandomArena extends Arena
     {
         int randomColumn = this.dice.nextInt(this.getWidth());
         int randomRow = this.dice.nextInt(this.getHeight());   
+    }
+    
+    private boolean isCellFree(int column, int row) {
+        List<Actor> list = this.getObjectsAt(column, row, Actor.class);
+        return list.isEmpty();
     }
 }
