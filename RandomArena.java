@@ -21,6 +21,11 @@ public class RandomArena extends Arena
         super(7, 7);
         this.createRectangleOfWalls(1, 1, 3, 3, 1, 1);
         this.dice = new Random();
+
+        int brickWallCount = this.getWidth() * this.getHeight() / 3;
+        for (int i = 0; i < brickWallCount; i = i + 1) {
+            this.createRandomWall();
+        }
     }
     
     public void createRandomWall()
