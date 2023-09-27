@@ -27,4 +27,9 @@ public class Explosive extends Actor
     {
         this.owner = null;
     }
+
+    public void printWhoYouAre() {
+        World world = this.getWorld();
+        world.showText("EXPLOSIVE", this.getX(), this.getY());
+    }
 }
