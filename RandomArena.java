@@ -27,6 +27,17 @@ public class RandomArena extends Arena
     {
         int randomColumn = this.dice.nextInt(this.getWidth());
         int randomRow = this.dice.nextInt(this.getHeight());   
+        
+        // check if the coordinates are free,
+        // if not, we need to generate another ones
+        while (!this.isCellFree(randomColumn, randomRow)) {
+            // generate new random coordinates
+            randomColumn = this.dice.nextInt(this.getWidth());
+            randomRow = this.dice.nextInt(this.getHeight());
+        }
+        
+        // coordinates are free so we can insert a brick wall
+        this.addObject(new BrickWall(), randomColumn, randomRow);
     }
     
     private boolean isCellFree(int column, int row) {
