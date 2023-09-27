@@ -46,6 +46,11 @@ public class Bomb extends Explosive
         }
     }
     
+    public void printWhoYouAre() {
+        World world = this.getWorld();
+        world.showText("BOMB", this.getX(), this.getY());
+    }
+    
     private void spreadFire(int deltaX, int deltaY) {
         // initialize fire counter
         int i = 1;
