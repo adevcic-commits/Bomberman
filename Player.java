@@ -15,20 +15,23 @@ public class Player extends Actor
     private String rightKey;
     private String leftKey;
     private String bombKey;
+    private String mineKey;
     private int stepSize;
     private int speed;
     private int counter;
     private int bombPower;
     private int bombCount;
+    private int mineCount;
     private LinkedList<Bomb> listOfActiveBombs;
+    private LinkedList<Mine> listOfActiveMines;
      
-    public Player(String upKey, String downKey, String rightKey, String leftKey, String bombKey)
+    public Player(String upKey, String downKey, String rightKey, String leftKey, String bombKey, String mineKey)
     {
-        this(upKey, downKey, rightKey, leftKey, bombKey, 3, 1, 2);
+        this(upKey, downKey, rightKey, leftKey, bombKey, mineKey, 3, 1, 2, 1);
     }
 
-    public Player(String upKey, String downKey, String rightKey, String leftKey, String bombKey,
-                  int speed, int bombPower, int bombCount)
+    public Player(String upKey, String downKey, String rightKey, String leftKey, String bombKey, String mineKey,
+                  int speed, int bombPower, int bombCount, int mineCount)
     {
         this.upKey = upKey;
         this.downKey = downKey;
@@ -36,12 +39,15 @@ public class Player extends Actor
         this.leftKey = leftKey;
         this.stepSize = stepSize;
         this.bombKey = bombKey;
+        this.mineKey = mineKey;
         this.stepSize = 1;
         this.speed = speed;
         this.counter = 0;
         this.bombPower = bombPower;
         this.bombCount = bombCount;
+        this.mineCount = mineCount;
         this.listOfActiveBombs = new LinkedList<Bomb>();
+        this.listOfActiveMines = new LinkedList<Mine>();
     }
 
     /**
@@ -70,6 +76,14 @@ public class Player extends Actor
                 this.bombCount = this.bombCount - 1; // lower the bomb count
                 this.listOfActiveBombs.add(bomb); // register the bomb
             }
+
+            if (this.canPlantMine()) {
+                Mine mine = new Mine(this); // create an instance of the Mine class
+                World world = this.getWorld(); // get a reference to the world
+                world.addObject(mine, this.getX(), this.getY()); // insert the mine into the world
+                this.mineCount = this.mineCount - 1; // lower the mine count
+                this.listOfActiveMines.add(mine); // register the mine
+            }
         }
     }
     
@@ -78,6 +92,10 @@ public class Player extends Actor
         arena.unregisterAndRemovePlayer(this);
         for (Bomb bomb : this.listOfActiveBombs) {
             bomb.removeOwner();
+        }
+        
+        for (Mine mine : this.listOfActiveMines) {
+            mine.removeOwner();
         }
     }
 
@@ -163,9 +181,29 @@ public class Player extends Actor
         return bombs.isEmpty();
     }
     
+    public boolean canPlantMine() 
+    {
+        if (!Greenfoot.isKeyDown(this.mineKey) || this.mineCount == 0) {
+            // if the key si not pressed or the player has no mines, the method ends
+            return false;
+        }
+        
+        // if the key is pressed the cell muset be empty
+        int x = this.getX();
+        int y = this.getY();
+        World world = this.getWorld(); 
+        List<Mine> mines = world.getObjectsAt(x, y, Mine.class);
+        return mines.isEmpty();
+    }
+    
     public void bombExploded(Bomb bomba) {
         this.bombCount = this.bombCount + 1;
         this.listOfActiveBombs.remove(bomba);
+    }
+    
+    public void mineExploded(Mine mine) {
+        this.mineCount = this.mineCount + 1;
+        this.listOfActiveMines.remove(mine);
     }
     
     public void showDimensions()
