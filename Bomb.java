@@ -25,25 +25,7 @@ public class Bomb extends Explosive
     public void act()
     {
         this.timer = this.timer - 1;
-        if (this.timer == 0 || this.isTouching(Fire.class)) {
-            if (super.owner != null) {
-                super.owner.bombExploded(this);
-            }
-
-            // bomb exploded, remove it from the world
-            World world = this.getWorld();
-
-            // create fire in the location of the bomb before we remove it from the world
-            world.addObject(new Fire(5), this.getX(), this.getY());
-            this.spreadFire(+1, 0); // spread the fire to the right
-            this.spreadFire(-1, 0); // spread the fire to the left
-            this.spreadFire(0, -1); // spread the fire upwards
-            this.spreadFire(0, +1); // spread the fire downwards
-
-            world.removeObject(this);
-            // play the explosion sound
-            Greenfoot.playSound("explosion.wav");         
-        }
+        super.act();
     }
     
     public void printWhoYouAre() {
