@@ -32,4 +32,12 @@ public class Explosive extends Actor
         World world = this.getWorld();
         world.showText("EXPLOSIVE", this.getX(), this.getY());
     }
+
+    protected boolean shouldExplode() {
+        // this clas is stable - it never explodes
+        return false;
+    }
+
+    protected void explosion() {
+    }
 }

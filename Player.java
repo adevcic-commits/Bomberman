@@ -206,6 +206,9 @@ public class Player extends Actor
         this.listOfActiveMines.remove(mine);
     }
     
+    public void explosiveExploded(Explosive explosive) {
+    }
+
     public void showDimensions()
     {
         // get a reference to the world
