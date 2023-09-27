@@ -34,7 +34,7 @@ public class Bomb extends Explosive
     }
 
     protected boolean shouldExplode() {
-        return this.timer == 0 || this.isTouching(Fire.class);
+        return this.timer == 0 || super.shouldExplode();
     }
 
     protected void explosion() {

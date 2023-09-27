@@ -21,8 +21,7 @@ public class Mine extends Explosive
     }
 
     protected boolean shouldExplode() {
-        // the mine must explode if it touches a fire
-        if (this.isTouching(Fire.class)) {
+        if (super.shouldExplode()) {
             return true;
         }
 

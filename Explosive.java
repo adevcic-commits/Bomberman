@@ -46,8 +46,7 @@ public class Explosive extends Actor
     }
 
     protected boolean shouldExplode() {
-        // this clas is stable - it never explodes
-        return false;
+        return this.isTouching(Fire.class);
     }
 
     protected void explosion() {
