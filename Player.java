@@ -72,7 +72,7 @@ public class Player extends Actor
                 World world = this.getWorld(); // get a reference to the world
                 world.addObject(bomb, this.getX(), this.getY()); // insert the bomb into the world
                 this.bombCount = this.bombCount - 1; // lower the bomb count
-                this.listOfActiveBombs.add(bomb); // register the bomb
+                this.listOfActiveExplosives.add(bomb); // register the bomb
             }
 
             if (this.canPlantMine()) {
@@ -80,7 +80,7 @@ public class Player extends Actor
                 World world = this.getWorld(); // get a reference to the world
                 world.addObject(mine, this.getX(), this.getY()); // insert the mine into the world
                 this.mineCount = this.mineCount - 1; // lower the mine count
-                this.listOfActiveMines.add(mine); // register the mine
+                this.listOfActiveExplosives.add(mine); // register the mine
             }
         }
     }
@@ -88,12 +88,8 @@ public class Player extends Actor
     public void hit() {
         Arena arena = (Arena)this.getWorld();
         arena.unregisterAndRemovePlayer(this);
-        for (Bomb bomb : this.listOfActiveBombs) {
-            bomb.removeOwner();
-        }
-        
-        for (Mine mine : this.listOfActiveMines) {
-            mine.removeOwner();
+        for (Explosive explosive : this.listOfActiveExplosives) {
+            explosive.removeOwner();
         }
     }
 
@@ -196,12 +192,12 @@ public class Player extends Actor
     
     public void bombExploded(Bomb bomba) {
         this.bombCount = this.bombCount + 1;
-        this.listOfActiveBombs.remove(bomba);
+        this.listOfActiveExplosives.remove(bomba);
     }
     
     public void mineExploded(Mine mine) {
         this.mineCount = this.mineCount + 1;
-        this.listOfActiveMines.remove(mine);
+        this.listOfActiveExplosives.remove(mine);
     }
     
     public void explosiveExploded(Explosive explosive) {
