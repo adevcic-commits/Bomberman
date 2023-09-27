@@ -18,7 +18,7 @@ public class RandomArena extends Arena
 
         int brickWallCount = this.getWidth() * this.getHeight() / 3;
         for (int i = 0; i < brickWallCount; i = i + 1) {
-            this.createRandomWall();
+            this.insertActorRandomly(new BrickWall());
         }
     }
 }

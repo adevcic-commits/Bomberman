@@ -85,7 +85,7 @@ public class Arena extends World
         return this.listOfPlayers.size() <= 1;
     }
     
-    public void createRandomWall()
+    public void insertActorRandomly(Actor actor)
     {
         int randomColumn = this.dice.nextInt(this.getWidth());
         int randomRow = this.dice.nextInt(this.getHeight());   
@@ -98,8 +98,8 @@ public class Arena extends World
             randomRow = this.dice.nextInt(this.getHeight());
         }
         
-        // coordinates are free so we can insert a brick wall
-        this.addObject(new BrickWall(), randomColumn, randomRow);
+        // coordinates are free so we can insert the actor
+        this.addObject(actor, randomColumn, randomRow);
     }
     
     private boolean isCellFree(int column, int row) {
