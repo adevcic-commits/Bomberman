@@ -84,7 +84,11 @@ public class Player extends Actor
             }
         }
     }
-    
+
+    public void increaseBombCount() {
+        this.bombCount = this.bombCount + 1;
+    }
+
     public void hit() {
         Arena arena = (Arena)this.getWorld();
         arena.unregisterAndRemovePlayer(this);

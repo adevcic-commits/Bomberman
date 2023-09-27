@@ -16,4 +16,8 @@ public class BonusBomb extends Bonus
     {
         // Add your action code here.
     }
+
+    protected void applyYourself(Player player) {
+        player.increaseBombCount();
+    }
 }
