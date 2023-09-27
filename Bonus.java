@@ -14,6 +14,14 @@ public class Bonus extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        Player player = (Player)this.getOneIntersectingObject(Player.class);
+        if (player != null) {
+            this.applyYourself(player);
+            World world = this.getWorld();
+            world.removeObject(this);
+        }
+    }
+    
+    protected void applyYourself(Player hrac) {
     }
 }
