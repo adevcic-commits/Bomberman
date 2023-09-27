@@ -57,4 +57,9 @@ public class Mine extends Explosive
             world.removeObject(this);
         }
     }
+
+    public void printWhoYouAre() {
+        World world = this.getWorld();
+        world.showText("MINE", this.getX(), this.getY());
+    }
 }
