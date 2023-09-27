@@ -7,14 +7,13 @@ import java.util.List;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Bomb extends Actor
+public class Bomb extends Explosive
 {
-    private Player owner;
     private int power;
     private int timer;
     
     public Bomb(Player owner, int power, int timer) {
-        this.owner = owner;
+        super(owner);
         this.power = power;
         this.timer = timer;
     }
@@ -26,30 +25,30 @@ public class Bomb extends Actor
     public void act()
     {
         this.timer = this.timer - 1;
-        if (this.timer == 0 || this.isTouching(Fire.class)) {
-            if (this.owner != null) {
-                this.owner.bombExploded(this);
-            }
-
-            // bomb exploded, remove it from the world
-            World world = this.getWorld();
-
-            // create fire in the location of the bomb before we remove it from the world
-            world.addObject(new Fire(5), this.getX(), this.getY());
-            this.spreadFire(+1, 0); // spread the fire to the right
-            this.spreadFire(-1, 0); // spread the fire to the left
-            this.spreadFire(0, -1); // spread the fire upwards
-            this.spreadFire(0, +1); // spread the fire downwards
-
-            world.removeObject(this);
-            // play the explosion sound
-            Greenfoot.playSound("explosion.wav");         
-        }
+        super.act();
+    }
+    
+    public void printWhoYouAre() {
+        World world = this.getWorld();
+        world.showText("BOMB", this.getX(), this.getY());
     }
 
-    public void removeOwner()
-    {
-        this.owner = null;
+    protected boolean shouldExplode() {
+        return this.timer == 0 || super.shouldExplode();
+    }
+
+    protected void explosion() {
+        World world = this.getWorld();
+
+        // create fire in the location of the bomb before we remove it from the world
+        world.addObject(new Fire(5), this.getX(), this.getY());
+        this.spreadFire(+1, 0); // spread the fire to the right
+        this.spreadFire(-1, 0); // spread the fire to the left
+        this.spreadFire(0, -1); // spread the fire upwards
+        this.spreadFire(0, +1); // spread the fire downwards
+
+        // play the explosion sound
+        Greenfoot.playSound("explosion.wav");
     }
     
     private void spreadFire(int deltaX, int deltaY) {
