@@ -190,17 +190,14 @@ public class Player extends Actor
         return mines.isEmpty();
     }
     
-    public void bombExploded(Bomb bomba) {
-        this.bombCount = this.bombCount + 1;
-        this.listOfActiveExplosives.remove(bomba);
-    }
-    
-    public void mineExploded(Mine mine) {
-        this.mineCount = this.mineCount + 1;
-        this.listOfActiveExplosives.remove(mine);
-    }
-    
     public void explosiveExploded(Explosive explosive) {
+        if (explosive instanceof Bomb) {
+            this.bombCount = this.bombCount + 1;
+        }
+        else if (explosive instanceof Mine) {
+            this.mineCount = this.mineCount + 1;
+        }
+        this.listOfActiveExplosives.remove(explosive);
     }
 
     public void showDimensions()
